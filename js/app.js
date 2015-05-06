@@ -38,6 +38,9 @@
 	$('.btn-group button[data-calendar-nav]').each(function() {
 		var $this = $(this);
 		$this.click(function() {
+			// DEBUG 
+			console.log('Here is month button');
+			
 			calendar.navigate($this.data('calendar-nav'));
 		});
 	});

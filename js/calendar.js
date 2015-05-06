@@ -995,7 +995,7 @@ if(!String.prototype.formatNum) {
 			}
 
 			if(!modal.data('handled.bootstrap-calendar') || (modal.data('handled.bootstrap-calendar') && modal.data('handled.event-id') != event.id)) {
-				modal	.off('show.bs.modal')
+				modal.off('show.bs.modal')
 					.off('shown.bs.modal')
 					.off('hidden.bs.modal')
 					.on('show.bs.modal', function() {
@@ -1075,6 +1075,9 @@ if(!String.prototype.formatNum) {
 		});
 
 		$('a.event').mouseenter(function() {
+			// DEBUG
+			console.log('Here is event whenever mouse over colorful circles in a day');
+			
 			$('a[data-event-id="' + $(this).data('event-id') + '"]').closest('.cal-cell1').addClass('day-highlight dh-' + $(this).data('event-class'));
 		});
 		$('a.event').mouseleave(function() {
@@ -1165,9 +1168,17 @@ if(!String.prototype.formatNum) {
 		// Wait 400ms before updating the modal & attach the mouseenter&mouseleave(400ms is the time for the slider to fade out and slide up)
 		setTimeout(function() {
 			$('a.event-item').mouseenter(function() {
+				//DEBUG
+				console.log('Here is event whenever mouse over the event link(not circle).');				
+				
+				var topic = $(this).text(), 
+					url = $(this).attr("href");
+				
+				$('div.detail').text("Topic:" + topic + '\n' + "URL:" + url);
+				
 				$('a[data-event-id="' + $(this).data('event-id') + '"]').closest('.cal-cell1').addClass('day-highlight dh-' + $(this).data('event-class'));
 			});
-			$('a.event-item').mouseleave(function() {
+			$('a.event-item').mouseleave(function() {				
 				$('div.cal-cell1').removeClass('day-highlight dh-' + $(this).data('event-class'));
 			});
 			self._update_modal();
